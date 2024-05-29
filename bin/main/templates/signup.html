@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
+</head>
+<body>
+	<br><br><br><br>
+	
+Member
+<form action="" method="post">
+	
+	<p>Phone Number : <input type="type" id="phonenum" placeholder="000-0000-0000">
+	<input type="button" onclick="phonenumjs();" value="Send"></p>
+	
+	
+	<p>Check Number : <input type="text" id="inputnum" placeholder="check number here...">
+	<input type="button" onclick="inputnumjs();" value="Check"></p>
+
+	<input id = "targetbtn" type="submit" value="Join" disabled></p>
+
+</form>
+
+
+
+
+<script>
+	var checknum;
+	
+	function phonenumjs(){
+		let tnum = $("#phonenum").val();
+                alert(tnum);
+
+		$.ajax({
+            url:"/checknum",
+            type:"post",
+            dataType:"json",
+            data:{"phonenum" : tnum},
+            success: function(result){
+                alert("Send SMS");
+                checknum = result
+     
+
+            }
+        });
+    }
+
+	function inputnumjs(){
+		
+		let inputnum = $("#inputnum").val();
+		alert("from server " + checknum)
+        
+        if(checknum == inputnum){
+            alert("OK");
+            let target = document.getElementById('targetbtn');
+  			target.disabled = false;
+        }else{
+            alert("Try again...");
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
